@@ -14,5 +14,6 @@ Cards(Jack,Queen,King) have value 10
 
 The card 'ace' can take the value 1 or 11 depending on the sum. If the overall sum exceeds 21 with ace having the value 11; the ace takes the value 1.
 
-<b>Modules required</b>
+<b>Modules required:</b>
+
 The modules required to run this code are Random and IPython
