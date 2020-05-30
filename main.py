@@ -3,7 +3,7 @@ from IPython.display import clear_output
 
 
 def blackjack():
-    class players_hand():
+    class PlayersHand:
 
         def process_sum(self):
             self.sum = 0
@@ -38,15 +38,9 @@ def blackjack():
 
             self.cardwords = []
             for card in self.mycards:
-                x = random.randint(1, 4)
-                if x == 1:
-                    cardtype = ' of diamonds'
-                if x == 2:
-                    cardtype = ' of clubs'
-                if x == 3:
-                    cardtype = ' of hearts'
-                if x == 4:
-                    cardtype = ' of spades'
+                types = [" of diamonds", " of spades", " of clubs", " of hearts"]
+
+                cardtype = random.choice(types)
 
                 mycard = card
                 if mycard == 11:
@@ -61,14 +55,14 @@ def blackjack():
                 elif mycard == 13:
                     mycard = 'king'
                 self.cardwords.append(str(mycard) + cardtype)
-            print('Your cards are ', end='')
+            print('Your cards are', end='')
             for card in self.cardwords:
                 print(', ', end='')
                 print(card, end='')
 
             print('\nSum=', self.process_sum())
+
         def hit(self):
-            import random
             num = random.randint(1, 13)
             count = 1
             while True:
@@ -80,22 +74,16 @@ def blackjack():
                 else:
                     break
             self.mycards.append(num)
-            if num > 1 and num < 10:
+            if 1 <= num <= 10:
                 pass
             elif num > 9:
                 num = 10
             else:
                 num = 11
             self.myhand.append(num)
-            x = random.randint(1, 4)
-            if x == 1:
-                cardtype = ' of diamonds'
-            if x == 2:
-                cardtype = ' of clubs'
-            if x == 3:
-                cardtype = ' of hearts'
-            if x == 4:
-                cardtype = ' of spades'
+            types = [" of diamonds", " of spades", " of clubs", " of hearts"]
+
+            cardtype = random.choice(types)
 
             mycard = num
             if mycard == 11:
@@ -112,15 +100,14 @@ def blackjack():
             self.cardwords.append(str(mycard) + cardtype)
 
         def print1(self):
-            print('Players cards are', end='')
+            print('Players cards are ', end='')
             for card in self.cardwords:
-                print(', ', end= '')
                 print(card, end='')
+                print(', ', end='')
 
-    class dealers_hand(players_hand):
+    class DealersHand(PlayersHand):
 
         def __init__(self):
-            import random
             x = random.randint(1, 13)
             y = random.randint(1, 13)
             self.mycards = [x, y]
@@ -136,15 +123,9 @@ def blackjack():
 
             self.cardwords = []
             for card in self.mycards:
-                x = random.randint(1, 4)
-                if x == 1:
-                    cardtype = ' of diamonds'
-                if x == 2:
-                    cardtype = ' of clubs'
-                if x == 3:
-                    cardtype = ' of hearts'
-                if x == 4:
-                    cardtype = ' of spades'
+                types = [" of diamonds", " of spades", " of clubs", " of hearts"]
+
+                cardtype = random.choice(types)
 
                 mycard = card
                 if mycard == 11:
@@ -165,12 +146,12 @@ def blackjack():
             print('The dealers cards are ', self.cardwords[0], ', hidden card')
 
         def print_whole(self):
-            print('Dealers cards are', end='')
+            print('Dealers cards are ', end='')
             for card in self.cardwords:
-                print(', ', end='')
                 print(card, end='')
+                print(', ', end='')
 
-    class Player():
+    class Player:
 
         def __init__(self, player_name, balance):
             self.player_name = player_name
@@ -201,8 +182,8 @@ def blackjack():
         player1.bet(bet_money)
         clear_output()
         print()
-        player1_hand = players_hand()
-        dealer_hand = dealers_hand()
+        player1_hand = PlayersHand()
+        dealer_hand = DealersHand()
         print()
         while True:
             sum_player = player1_hand.process_sum()
