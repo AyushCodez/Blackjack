@@ -3,7 +3,7 @@ from IPython.display import clear_output
 
 
 def blackjack():
-    class PlayersHand:
+    class Hand:
 
         def process_sum(self):
             self.sum = 0
@@ -55,12 +55,6 @@ def blackjack():
                 elif mycard == 13:
                     mycard = 'king'
                 self.cardwords.append(str(mycard) + cardtype)
-            print('Your cards are', end='')
-            for card in self.cardwords:
-                print(', ', end='')
-                print(card, end='')
-
-            print('\nSum=', self.process_sum())
 
         def hit(self):
             num = random.randint(1, 13)
@@ -105,44 +99,7 @@ def blackjack():
                 print(card, end='')
                 print(', ', end='')
 
-    class DealersHand(PlayersHand):
-
-        def __init__(self):
-            x = random.randint(1, 13)
-            y = random.randint(1, 13)
-            self.mycards = [x, y]
-            self.myhand = []
-            for num in self.mycards:
-                if num > 1 and num < 10:
-                    pass
-                elif num > 9:
-                    num = 10
-                else:
-                    num = 11
-                self.myhand.append(num)
-
-            self.cardwords = []
-            for card in self.mycards:
-                types = [" of diamonds", " of spades", " of clubs", " of hearts"]
-
-                cardtype = random.choice(types)
-
-                mycard = card
-                if mycard == 11:
-                    mycard = 'jack'
-
-                elif mycard == 1:
-                    mycard = 'ace'
-
-                elif mycard == 12:
-                    mycard = 'queen'
-
-                elif mycard == 13:
-                    mycard = 'king'
-                self.cardwords.append(str(mycard) + cardtype)
-            print('The dealers cards are', self.cardwords[0]+', hidden card')
-
-        def print1(self):
+        def print1_dealer(self):
             print('The dealers cards are ', self.cardwords[0], ', hidden card')
 
         def print_whole(self):
@@ -153,8 +110,7 @@ def blackjack():
 
     class Player:
 
-        def __init__(self, player_name, balance):
-            self.player_name = player_name
+        def __init__(self, balance):
             self.balance = balance
 
         def bet(self, bet_money):
@@ -169,11 +125,10 @@ def blackjack():
     print('Welcome to blackjack!')
     y = input('Are you ready(Y or N): ')
 
-    while y == 'N':
+    while y != 'Y':
         y = input('Are you ready(Yes or No): ')
-    player_name = input('What is your name? ')
     money = int(input('how much do you want your balance to be? '))
-    player1 = Player(player_name, money)
+    player1 = Player(money)
 
     while want == 'Y':
         bet_money = player1.balance + 1
@@ -182,8 +137,12 @@ def blackjack():
         player1.bet(bet_money)
         clear_output()
         print()
-        player1_hand = PlayersHand()
-        dealer_hand = DealersHand()
+        player1_hand = Hand()
+        sum_player = player1_hand.process_sum()
+        player1_hand.print1()
+        print(f'\nsum={sum_player}')
+        dealer_hand = Hand()
+        dealer_hand.print1_dealer()
         print()
         while True:
             sum_player = player1_hand.process_sum()
@@ -196,7 +155,7 @@ def blackjack():
                     sum_player = player1_hand.process_sum()
                     player1_hand.print1()
                     print(f'\nsum={sum_player}')
-                    dealer_hand.print1()
+                    dealer_hand.print1_dealer()
                     print('')
 
                 else:
@@ -224,13 +183,14 @@ def blackjack():
             while sum_dealer < 21 and sum_dealer <= sum_player:
                 dealer_hand.hit()
                 sum_dealer = dealer_hand.process_sum()
+                print('Dealer hits')
                 player1_hand.print1()
                 print(f'\nsum={sum_player}')
                 dealer_hand.print_whole()
                 print(f'\nsum={sum_dealer}')
                 print('')
 
-            if sum_dealer > sum_player and sum_dealer <= 21:
+            if 21 <= sum_dealer > sum_player:
                 print('Sorry! You lost!')
                 print('your current bank balance=', player1.balance)
 
