@@ -14,10 +14,10 @@ while want == 'Y':
     bet_money = player1.balance + 1
     count = 1
     while bet_money > player1.balance or bet_money <= 0:
-        bet_money = int(input(f'How much do you want to bet? (your current balance is {player1.balance}) '))
         if count > 1:
             print('Please enter valid amount')
         count += 1
+        bet_money = int(input(f'How much do you want to bet? (your current balance is {player1.balance}) '))
     player1.bet(bet_money)
     clear_output()
     print()
@@ -83,5 +83,5 @@ while want == 'Y':
             player1.winning(bet_money * 2)
             print('your current bank balance=', player1.balance)
 
-    want = input('do you want to play again?(Y or N)')
+    want = input('Do you want to play again?(Y or N) ')
     clear_output()

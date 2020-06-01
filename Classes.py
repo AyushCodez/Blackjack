@@ -26,7 +26,7 @@ class Hand:
         self.mycards = [x, y]
         self.myhand = []
         for num in self.mycards:
-            if num > 1 and num < 10:
+            if 1 <= num < 10:
                 pass
             elif num > 9:
                 num = 10
@@ -73,9 +73,6 @@ class Hand:
         else:
             num = 11
         self.myhand.append(num)
-        types = [" of diamonds", " of spades", " of clubs", " of hearts"]
-
-        cardtype = random.choice(types)
 
         mycard = num
         if mycard == 11:
@@ -89,6 +86,15 @@ class Hand:
 
         elif mycard == 13:
             mycard = 'king'
+
+        while True:
+            types = [" of diamonds", " of spades", " of clubs", " of hearts"]
+
+            cardtype = random.choice(types)
+
+            if str(mycard) + cardtype not in self.cardwords:
+                break
+
         self.cardwords.append(str(mycard) + cardtype)
 
     def print1(self):
