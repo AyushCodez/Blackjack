@@ -82,7 +82,6 @@ while want == 'Y':
             print('Hooray! You won!')
             player1.winning(bet_money * 2)
             print('your current bank balance=', player1.balance)
-            player1.winning(bet_money * 2)
 
     want = input('do you want to play again?(Y or N)')
     clear_output()
