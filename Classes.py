@@ -98,19 +98,13 @@ class Hand:
         self.cardwords.append(str(mycard) + cardtype)
 
     def print1(self):
-        print('Players cards are ', end='')
-        for card in self.cardwords:
-            print(card, end='')
-            print(', ', end='')
+        print('Players cards are ' + ', '.join(self.cardwords))
 
     def print1_dealer(self):
         print('The dealers cards are ' + self.cardwords[0] + ', hidden card')
 
     def print_whole(self):
-        print('Dealers cards are ', end='')
-        for card in self.cardwords:
-            print(card, end='')
-            print(', ', end='')
+        print('Dealers cards are ' + ', '.join(self.cardwords))
 
 
 class Player:
