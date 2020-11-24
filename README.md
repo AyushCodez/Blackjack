@@ -16,7 +16,7 @@ The card 'ace' can take the value 1 or 11 depending on the sum. If the overall s
 
 <b>Modules required:</b>
 
-The modules required to run this code are Random and IPython
+No extra dependencies required to run.
 
 <b>Test run:</b>
 ![](images/test_output_blackjack.JPG)
