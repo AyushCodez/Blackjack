@@ -1,6 +1,5 @@
 from Classes import Player, Hand
 
-want = 'Y'
 print('Welcome to blackjack!')
 y = input('Are you ready(y or n): ')
 
@@ -17,7 +16,7 @@ while money <= 0:
         print('Enter valid amount')
 player1 = Player(money)
 
-while want.upper() == 'Y':
+while y.upper() == 'Y':
     bet_money = player1.balance + 1
     count = 0
     while bet_money > player1.balance or bet_money <= 0:
@@ -25,8 +24,7 @@ while want.upper() == 'Y':
         try:
             bet_money = int(input(f'How much do you want to bet? (your current balance is {player1.balance}) '))
         except ValueError:
-            print('Enter valid amount')
-            continue
+            print('Enter integer')
         else:
             if count > 1:
                 print('Please enter valid amount')
@@ -99,4 +97,4 @@ while want.upper() == 'Y':
     if player1.balance == 0:
         print('You went bankrupt!!\nGame Over')
         break
-    want = input('Do you want to play again?(y or n) ')
+    y = input('Do you want to play again?(y or n) ')
